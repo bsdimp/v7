@@ -480,7 +480,7 @@ int	swapdev	= makedev(%d, %d);\n\
 int	pipedev = makedev(%d, %d);\n\
 int	nldisp = %d;\n\
 daddr_t	swplo	= %ld;\n\
-int	nswap	= %l;\n\
+int	nswap	= %ld;\n\
 "};
 
 char	strg1[] =
@@ -722,9 +722,11 @@ input()
 	if (fgets(line, 100, stdin) == NULL)
 		return(0);
 	count = -1;
-	n = sscanf(line, "%d%s%s%ld", &count, keyw, dev, &num);
-	if (count == -1 && n>0) {
+	if (isdigit(*line)) {
+		n = sscanf(line, "%d%s%s%ld", &count, keyw, dev, &num);
+	} else {
 		count = 1;
+		n = sscanf(line, "%s%s%ld", keyw, dev, &num);
 		n++;
 	}
 	if (n<2)
