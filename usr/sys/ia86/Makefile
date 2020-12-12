@@ -1,7 +1,8 @@
 # X=${HOME}/pdp11/local/bin/pdp11-dec-aout-
 X=ia16-elf-
 CC=${X}gcc -melks
-CFLAGS=-Os -I. -ffreestanding  -Wno-implicit-function-declaration -Wno-implicit-int -Wno-implicit-function-declaration -fms-extensions -Wno-incompatible-pointer-types
+CFLAGS=-ffreestanding -fno-inline -melks -mtune=i8086 -mcmodel=small -mno-segment-relocation-stuff -I. \
+	-Wno-implicit-function-declaration -Wno-implicit-int -Wno-implicit-function-declaration -fms-extensions -Wno-incompatible-pointer-types
 AR=${X}ar
 AS=${X}as
 LD=${X}ld
