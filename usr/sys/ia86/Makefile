@@ -1,0 +1,79 @@
+# X=${HOME}/pdp11/local/bin/pdp11-dec-aout-
+X=ia16-elf-
+CC=${X}gcc -melks
+CFLAGS=-Os -I. -ffreestanding  -Wno-implicit-function-declaration -Wno-implicit-int -Wno-implicit-function-declaration -fms-extensions -Wno-incompatible-pointer-types
+AR=${X}ar
+AS=${X}as
+LD=${X}ld
+
+VPATH=../sys:../dev:.
+
+sys_OBJS=main.o \
+	trap.o \
+	sig.o \
+	iget.o \
+	prf.o \
+	slp.o \
+	subr.o \
+	rdwri.o \
+	clock.o \
+	fio.o \
+	malloc.o \
+	alloc.o \
+	machdep.o \
+	nami.o \
+	pipe.o \
+	prim.o \
+	fakemx.o \
+	sysent.o \
+	sys3.o \
+	sys1.o \
+	sys4.o \
+	sys2.o \
+	acct.o \
+	text.o \
+	ureg.o
+
+dev_OBJS=bio.o \
+	cat.o \
+	dhdm.o \
+	dh.o \
+	dhfdm.o \
+	dn.o \
+	du.o \
+	hp.o \
+	ht.o \
+	kl.o \
+	mem.o \
+	mx1.o \
+	mx2.o \
+	partab.o \
+	rf.o \
+	rk.o \
+	sys.o \
+	tc.o \
+	tm.o \
+	tty.o \
+	vp.o \
+	vs.o \
+	dsort.o \
+	dkleave.o \
+	pk0.o \
+	pk1.o \
+	pk2.o \
+	pk3.o \
+	dc.o \
+	dz.o \
+	rl.o \
+	rp.o
+
+unix:	low.o conf.o sys.a dev.a
+	# -i -x
+	${LD} -o unix low.o conf.o sys.a dev.a
+
+sys.a: ${sys_OBJS}
+	${AR} -cr sys.a ${sys_OBJS}
+
+dev.a: ${dev_OBJS}
+	${AR} -cr dev.a ${dev_OBJS}
+
