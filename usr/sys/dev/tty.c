@@ -14,7 +14,7 @@
 #include "../h/reg.h"
 #include "../h/conf.h"
 
-char	partab[];
+extern char	partab[];
 
 
 /*
