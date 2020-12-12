@@ -2,12 +2,12 @@
  * tunable variables
  */
 
-#define	NBUF	29		/* size of buffer cache */
-#define	NINODE	200		/* number of in core inodes */
-#define	NFILE	175		/* number of in core file structures */
-#define	NMOUNT	8		/* number of mountable file systems */
+#define	NBUF	8		/* size of buffer cache */
+#define	NINODE	75		/* number of in core inodes */
+#define	NFILE	75		/* number of in core file structures */
+#define	NMOUNT	3		/* number of mountable file systems */
 #define	MAXMEM	(64*32)		/* max core per process - first # is Kw */
-#define	MAXUPRC	25		/* max processes per user */
+#define	MAXUPRC	15		/* max processes per user */
 #define	SSIZE	20		/* initial stack size (*64 bytes) */
 #define	SINCR	20		/* increment of stack (*64 bytes) */
 #define	NOFILE	20		/* max open files per process */
@@ -15,8 +15,8 @@
 #define	CMAPSIZ	50		/* size of core allocation area */
 #define	SMAPSIZ	50		/* size of swap allocation area */
 #define	NCALL	20		/* max simultaneous time callouts */
-#define	NPROC	150		/* max number of processes */
-#define	NTEXT	40		/* max number of pure texts */
+#define	NPROC	50		/* max number of processes */
+#define	NTEXT	25		/* max number of pure texts */
 #define	NCLIST	100		/* max total clist size */
 #define	HZ	60		/* Ticks/second of the clock */
 #define	TIMEZONE (5*60)		/* Minutes westward from Greenwich */
@@ -91,8 +91,8 @@
 #define	NICINOD	100		/* number of superblock inodes */
 #define	NICFREE	50		/* number of superblock free blocks */
 #define	INFSIZE	138		/* size of per-proc info for users */
-#define	CBSIZE	14		/* number of chars in a clist block */
-#define	CROUND	017		/* clist rounding: sizeof(int *) + CBSIZE - 1*/
+#define	CBSIZE	6		/* number of chars in a clist block */
+#define	CROUND	07		/* clist rounding: sizeof(int *) + CBSIZE - 1*/
 
 /*
  * Some macros for units conversion
