@@ -13,47 +13,40 @@
 
 int	nulldev();
 int	nodev();
+int	hdopen(), hdstrategy();
+struct buf hdtab;
+int	fdstrategy();
+struct buf fdtab;
+int	mdstrategy();
+struct buf mdtab;
 struct	bdevsw	bdevsw[] =
 {
-	nulldev, nulldev, rkstrategy, &rktab,	/* rk = 0 */
-	nodev, nodev, nodev, 0, /* rp = 1 */
-	nodev, nodev, nodev, 0, /* rf = 2 */
-	nodev, nodev, nodev, 0, /* tm = 3 */
-	nodev, nodev, nodev, 0, /* tc = 4 */
-	nodev, nodev, nodev, 0, /* hs = 5 */
-	nodev, nodev, nodev, 0, /* hp = 6 */
-	htopen, htclose, htstrategy, &httab,	/* ht = 7 */
-	nodev, nodev, nodev, 0, /* rl = 8 */
+	hdopen, nulldev, hdstrategy, &hdtab,	/* hd = 0 */
+	nulldev, nulldev, fdstrategy, &fdtab,	/* fd = 1 */
+	nulldev, nulldev, mdstrategy, &mdtab,	/* md = 2 */
 	0
 };
 
-int	klopen(), klclose(), klread(), klwrite(), klioctl();
-int	mmread(), mmwrite();
-int	rkread(), rkwrite();
-int	htread(), htwrite();
+int	hdread(), hdwrite();
 int	syopen(), syread(), sywrite(), sysioctl();
+int	scopen(), scclose(), scread(), scwrite(), scioctl();
+int	mmread(), mmwrite();
+int	sropen(), srclose(), srread(), srwrite(), srioctl();
+struct	tty	sr[];
+int	fdread(), fdwrite();
+int	mdread(), mdwrite();
+int	cdread();
 
 struct	cdevsw	cdevsw[] =
 {
-	klopen, klclose, klread, klwrite, klioctl, nulldev, 0,	/* console = 0 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* pc = 1 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* lp = 2 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* dc = 3 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* dh = 4 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* dp = 5 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* dj = 6 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* dn = 7 */
-	nulldev, nulldev, mmread, mmwrite, nodev, nulldev, 0, 	/* mem = 8 */
-	nulldev, nulldev, rkread, rkwrite, nodev, nulldev, 0,	/* rk = 9 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* rf = 10 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* rp = 11 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* tm = 12 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* hs = 13 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* hp = 14 */
-	htopen, htclose, htread, htwrite, nodev, nulldev, 0,	/* ht = 15 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* du = 16 */
-	syopen, nulldev, syread, sywrite, sysioctl, nulldev, 0,	/* tty = 17 */
-	nodev, nodev, nodev, nodev, nodev, nulldev, 0, /* rl = 18 */
+	scopen, scclose, scread, scwrite, scioctl, nulldev, 0,	/* console = 0 */
+	nulldev, nulldev, mmread, mmwrite, nodev, nulldev, 0,	/* mem = 1 */
+	syopen, nulldev, syread, sywrite, sysioctl, nulldev, 0,	/* tty = 2 */
+	sropen, srclose, srread, srwrite, srioctl, nulldev, sr,	/* sr = 3 */
+	hdopen, nulldev, hdread, hdwrite, nodev, nulldev, 0,	/* hd = 4 */
+	nulldev, nulldev, fdread, fdwrite, nodev, nulldev, 0,	/* fd = 5 */
+	nulldev, nulldev, mdread, mdwrite, nodev, nulldev, 0,	/* md = 6 */
+	nulldev, nulldev, cdread, nodev, nodev, nulldev, 0,	/* cd = 7 */
 	0
 };
 
@@ -73,11 +66,16 @@ int	nswap	= 872;
 struct	buf	buf[NBUF];
 struct	file	file[NFILE];
 struct	inode	inode[NINODE];
+#if 0
 int	mpxchan();
 int	(*ldmpx)() = mpxchan;
+#endif
 struct	proc	proc[NPROC];
 struct	text	text[NTEXT];
 struct	buf	bfreelist;
 struct	acct	acctbuf;
 struct	inode	*acctp;
 struct user u;
+
+/* XXX */
+caddr_t waitloc;
