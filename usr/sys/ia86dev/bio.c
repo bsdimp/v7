@@ -10,6 +10,9 @@
 #include "../h/proc.h"
 #include "../h/seg.h"
 
+#define PHY 0 /* XXX BOGUS */
+#define PGSH  12 /* 4k? */
+
 #define	DISKMON	1
 
 #ifdef	DISKMON

@@ -13,7 +13,12 @@
 #include "../h/user.h"
 #include "../h/conf.h"
 
-extern int end;
+#define PHY 0
+#define KSTK 0xf000
+#define KBASE 0x60 << 4
+
+/* extern int end; XXX*/
+int end;
 
 mmread(dev)
 {

@@ -11,6 +11,10 @@
 #include "../h/dir.h"
 #include "../h/user.h"
 
+#define PHY 0
+#define KSTK 0xf000
+#define KBASE 0x60 << 4
+
 char *mdmem = (char *)(PHY + 0xe00000); /* memory to use */
 int mdsz = 4096;		/* size in blocks */
 

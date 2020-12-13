@@ -285,7 +285,10 @@ doio(x)
 {
 
 	if ((x & (BSY | DRQ)) == DRQ) {
-		(hd.rd ? insw : outsw)(DATA, hd.addr, BSIZE >> 1);
+		if (hd.rd)
+			insw(DATA, hd.addr, BSIZE >> 1);
+		else
+			outsw(DATA, hd.addr, BSIZE >> 1);
 		hd.addr += BSIZE;
 		hd.bc--;
 	}

@@ -5,6 +5,8 @@
  * Floppy disk driver
  */
 
+#define PHY 0 /* XXX bogus */
+
 #include "../h/param.h"
 #include "../h/buf.h"
 #include "../h/dir.h"
@@ -81,6 +83,15 @@ static int trq; 		/* Timer request */
 struct buf rfdbuf;
 struct buf fdtab;
 
+static fdx1();
+static fdx2();
+static fddma();
+static fdcmd();
+static fdrst();
+static fdsis();
+static fdput();
+static fdget();
+static fdrqm();
 fdtimer();
 
 void
