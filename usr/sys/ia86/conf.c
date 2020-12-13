@@ -13,10 +13,6 @@
 
 int	nulldev();
 int	nodev();
-int	rkstrategy();
-struct	buf	rktab;
-int	htopen(), htclose(), htstrategy();
-struct	buf	httab;
 struct	bdevsw	bdevsw[] =
 {
 	nulldev, nulldev, rkstrategy, &rktab,	/* rk = 0 */

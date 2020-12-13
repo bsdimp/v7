@@ -12,7 +12,7 @@ AR=${X}ar
 AS=${X}as
 LD=${X}ld
 
-VPATH=../sys:../dev:.
+VPATH=../sys:../ia86dev:../dev:.
 
 sys_OBJS=main.o \
 	trap.o \
@@ -30,7 +30,6 @@ sys_OBJS=main.o \
 	nami.o \
 	pipe.o \
 	prim.o \
-	fakemx.o \
 	sysent.o \
 	sys3.o \
 	sys1.o \
@@ -41,37 +40,12 @@ sys_OBJS=main.o \
 	ureg.o
 
 dev_OBJS=bio.o \
-	cat.o \
-	dhdm.o \
-	dh.o \
-	dhfdm.o \
-	dn.o \
-	du.o \
-	hp.o \
-	ht.o \
-	kl.o \
 	mem.o \
-	mx1.o \
-	mx2.o \
 	partab.o \
-	rf.o \
-	rk.o \
 	sys.o \
-	tc.o \
-	tm.o \
 	tty.o \
-	vp.o \
-	vs.o \
 	dsort.o \
-	dkleave.o \
-	pk0.o \
-	pk1.o \
-	pk2.o \
-	pk3.o \
-	dc.o \
-	dz.o \
-	rl.o \
-	rp.o
+	dkleave.o
 
 unix:	low.o conf.o sys.a dev.a
 	# -i -x
