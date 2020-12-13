@@ -34,6 +34,15 @@ splx:
 	pushf
 	jmp	*%cx
 	
+	.globl	cli
+cli:
+	cli
+	ret
+	.globl	sti
+sti:
+	sti
+	ret
+
 	.globl copyin
 copyin:
 	.globl copyiin
@@ -78,8 +87,6 @@ stst:
 backup:
 	.globl	addupc
 addupc:
-	.globl	timeout
-timeout:
 	.globl	ttioccom
 ttioccom:
 	.globl	__divsi3
@@ -90,3 +97,18 @@ __mulsi3:
 __modsi3:
 	.globl	__ashrsi3
 __ashrsi3:
+	.globl	inb
+inb:
+	.globl	outb
+outb:
+	.globl	insw
+insw:
+	.globl	outsw
+outsw:
+	.globl	bzero
+bzero:
+	.globl physaddr
+physaddr:
+	.globl display
+display:
+	ret
