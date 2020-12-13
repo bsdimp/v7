@@ -37,19 +37,34 @@ sys_OBJS=main.o \
 	sys2.o \
 	acct.o \
 	text.o \
+	fakemx.o \
 	ureg.o
 
 dev_OBJS=bio.o \
+	cd.o \
+	fd.o \
+	hd.o \
+	md.o \
 	mem.o \
 	partab.o \
+	sc.o \
+	sr.o \
 	sys.o \
 	tty.o \
 	dsort.o \
 	dkleave.o
 
+later=	mx1.o \
+	mx2.o \
+	pk0.o \
+	pk1.o \
+	pk2.o \
+	pk3.o
+
+
 unix:	low.o conf.o sys.a dev.a
 	# -i -x
-	${LD} -o unix low.o conf.o sys.a dev.a
+	${LD} -o unix low.o conf.o sys.a dev.a sys.a
 
 sys.a: ${sys_OBJS}
 	${AR} -cr sys.a ${sys_OBJS}
