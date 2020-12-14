@@ -27,4 +27,20 @@ hope to see it running on my DEC Rainbow 100B someday.
 7th Edition didn't have networking, so there will likely be a side
 project to port 2.9BSD and/or 2.11BSD over.
 
+I've pulled in some drivers from Robert Nordier's v7/x86 port to get a
+leg up on things. His port was a 32-bit port (this one is 16-bit) and
+to the later members of the early IBM family with a full 16-bit ISA
+bus. Some adjustments are necessary. Some other of his code will be
+good, while a lot of it is sadly only applicable to the 32-bit
+version.
 
+I'm also trying to do this with an eye to still supporting the old
+pdp-11 code as well. I'm doing this so I can prove there's no
+regressions. I'm trying hard to not move things around, but introduce
+new directies (ia86*) that mirror the old ones and are at the same
+level in the heirarchy so that the "../h/blah.h" includes will still
+work.
+
+In the future, I may do an ANSI-ification pass over this code. It
+would be helpful to have a regression machine to test against as well
+nutil the x86 port is robust enough to take over the testing.
