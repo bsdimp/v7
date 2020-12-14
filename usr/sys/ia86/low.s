@@ -87,8 +87,6 @@ stst:
 backup:
 	.globl	addupc
 addupc:
-	.globl	ttioccom
-ttioccom:
 	.globl	__divsi3
 __divsi3:
 	.globl	__mulsi3
