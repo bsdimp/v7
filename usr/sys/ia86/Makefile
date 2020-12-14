@@ -1,7 +1,7 @@
 # X=${HOME}/pdp11/local/bin/pdp11-dec-aout-
 X=ia16-elf-
 CC=${X}gcc
-CFLAGS=-ffreestanding -fno-inline -melks \
+CFLAGS=-ffreestanding -fno-inline -melks -Os \
 	-mtune=i8086 -mcmodel=small -mno-segment-relocation-stuff -I. \
 	${CWARNS}
 CWARNS=	-Wno-implicit-function-declaration \
