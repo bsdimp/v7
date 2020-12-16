@@ -65,6 +65,27 @@ outb:
 	outb	%al, %dx
 	ret
 
+	/
+	/ insw(port, addr, words)
+	/
+	.globl	insw
+insw:
+	mov	%sp, %bx
+	push	%es
+	push	%ds
+	pop	%es
+	mov	2(%bx), %dx
+	mov	6(%bx), %di
+	mov	4(%bx), %cx
+//	rep	insw
+0:
+	inw	%dx
+	stosw
+	loop	0b
+
+	pop	%es
+	ret
+
 	.globl copyin
 copyin:
 	.globl copyiin
@@ -117,8 +138,6 @@ __mulsi3:
 __modsi3:
 	.globl	__ashrsi3
 __ashrsi3:
-	.globl	insw
-insw:
 	.globl	outsw
 outsw:
 	.globl	bzero
