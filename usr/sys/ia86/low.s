@@ -43,6 +43,28 @@ sti:
 	sti
 	ret
 
+	/
+	/ val = inb(port)
+	/
+	.globl	inb
+inb:
+	mov	%sp, %bx
+	mov	2(%bx), %dx
+	xor	%ax, %ax
+	inb	%dx
+	ret
+
+	/
+	/ outb(port, val)
+	/
+	.globl	outb
+outb:
+	mov	%sp, %bx
+	mov	2(%bx), %dx
+	mov	4(%bx), %ax
+	outb	%al, %dx
+	ret
+
 	.globl copyin
 copyin:
 	.globl copyiin
@@ -95,10 +117,6 @@ __mulsi3:
 __modsi3:
 	.globl	__ashrsi3
 __ashrsi3:
-	.globl	inb
-inb:
-	.globl	outb
-outb:
 	.globl	insw
 insw:
 	.globl	outsw
