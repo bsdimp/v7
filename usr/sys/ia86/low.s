@@ -86,6 +86,27 @@ insw:
 	pop	%es
 	ret
 
+	/
+	/ outsw(port, addr, words)
+	/
+	.globl	outsw
+outsw:
+	mov	%sp, %bx
+	push	%es
+	push	%ds
+	pop	%es
+	mov	2(%bx), %dx
+	mov	6(%bx), %di
+	mov	4(%bx), %cx
+//	rep	outsw
+0:
+	lodsw
+	outw	%ax, %dx
+	loop	0b
+
+	pop	%es
+	ret
+
 	.globl copyin
 copyin:
 	.globl copyiin
@@ -138,8 +159,6 @@ __mulsi3:
 __modsi3:
 	.globl	__ashrsi3
 __ashrsi3:
-	.globl	outsw
-outsw:
 	.globl	bzero
 bzero:
 	.globl physaddr
