@@ -44,3 +44,10 @@ work.
 In the future, I may do an ANSI-ification pass over this code. It
 would be helpful to have a regression machine to test against as well
 nutil the x86 port is robust enough to take over the testing.
+
+For comparison, the venix kernel on my DEC Rainbow is
+```
+text    data    bss    dec   hex
+40060   3044    18840  61944 f1f8
+-r--r--r-- 1 root    43354 Dec  7 16:49 /venix
+```
