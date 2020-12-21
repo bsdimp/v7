@@ -33,6 +33,8 @@ for its system calls.... But I digress... or do I?
 
 ![Rainbow Interrupt Selection](rb-intr-select.png)
 
+![Rainbow Interrupts](rb-8088-intr.png)
+
 Has the circuit that puts the interrupt number on the bus during. We
 feed all the interrupts into the 74LS373 (E80) Quad Latch. This is
 latched when `SH1 INTA L` is asserted. The i8088 asserts this at the
