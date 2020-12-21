@@ -62,6 +62,14 @@ really needs this, but CP/M and unix don't care. INTFIX.ASM from
 the different copies of the MS-DOS BIOS has all the details on
 what's needed to work around this...
 
+### Unknonws
+
+DOS has a CLKISR at INT 2C. Question: does the ROM call this? Check
+the ROM BIOS docs / disassembly.  Normally, the ROM BIOS is at
+interrupt 0x28 (40 decimal), but DOS moves it to 0x18. It also sets up
+a FASTCON software interrupt at 0x29 that's little more than an thin
+wrapper around `INT ROM`.
+
 ## Video
 
 ### Output
@@ -98,4 +106,32 @@ this part is a clone of the Z80-SIO chip, which was quite common in
 Z80 designs and is much better documented when you look for it under
 that name.
 
+## I/O PORTS
 
+These are scraped from different places
+
+symbol | value | description
+------ | ----- | -----------
+INTZ80 | 0H | Z80 Interrupt Port
+KDP | 010H | Keyboard 8251 data port
+KSP | 011H | Keyboard 8251 status port
+AUXDP | 040H | Comm. 7201 data port
+PRNDP | 041H | Printer 7201 data port
+AUXP  | 042H | Comm. 7201 status port
+PRNP  | 043H | Printer 7201 status port
+RDBASE | 060H | Base of disk registers
+DATA | 060H | Disk data register
+WPRCMP | 061H | Disk precomp/error register
+ERROR | 061H | Disk precomp/error register
+SECTC | 062H | Disk sector count register
+SECTN | 063H | Disk starting sector number register
+CYLDL | 064H | Disk low cylinder number register
+CYLDH | 065H | Disk high cylinder number register
+SDH | 066H | Disk sector size, disk, and head reg
+RDCMD | 067H | Disk command/status register
+RDSTAT | 067H | Disk command/status register
+RDCMD2 | 068H | Disk secondary command/status register
+DSTAT0 | 068H | Disk secondary command/status register
+DSTAT1 | 069H | Disk drive status register
+
+There's a few more related to diagnostics defined in the schematic.
