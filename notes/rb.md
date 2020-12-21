@@ -108,6 +108,21 @@ that name.
 
 You'll also see '8274' which is the Intel part number.
 
+PORT A:
+Port address 2 reads modem signals
+Port address 6 controls baud generation
+
+PORT B:
+No modem signals
+Port address 0xe for baud generation
+
+## Extended
+
+20H for modem signals
+21H for baud genertaion
+29H Data port
+2BH Status Port
+
 ## I/O PORTS
 
 These are scraped from different places
@@ -168,3 +183,33 @@ It uses INT ROM DI==0xe to get clock rate
 It also uses function 0xc to reset vectors for 02 (NMI for bad RAM)
 20, 22, 23, 25, 26, and 2C which puts the graphics card and extended
 option card into reset.
+
+From schematic:
+
+READ PORT | Signal
+--------- | ------
+0 | SH1 CLR88 L
+8 | SH1 IORD2 L
+2 | SH1 IORD4 L
+A | SH1 IORD6 L
+
+
+WRITE PORT | Signal
+---------- | ------
+0 | Something with SH1 INT Z80 L
+2 | SH1 IO WR 4 L
+A | SH1 IO WR 6 L
+4 | SH1 DC11WR L
+C | SH1 DC12WR L
+6 | SH1 WR5016 H
+E | SH1 WR BRG MUX L
+
+16 PORTS AT | Signal
+----------- | ------
+40 | SH1 COMM/PRT SEL L
+10 | SH1 KBD SEL L
+50 | SH1 GRAPHICS SEL L
+20 | SH1 BDL SEL1 L
+60 | SH1 BDL SEL2 L
+30 | SH1 BDL SEL3 L
+70 | SH1 BDL SEL4 L
