@@ -106,6 +106,8 @@ this part is a clone of the Z80-SIO chip, which was quite common in
 Z80 designs and is much better documented when you look for it under
 that name.
 
+You'll also see '8274' which is the Intel part number.
+
 ## I/O PORTS
 
 These are scraped from different places
@@ -135,3 +137,34 @@ DSTAT0 | 068H | Disk secondary command/status register
 DSTAT1 | 069H | Disk drive status register
 
 There's a few more related to diagnostics defined in the schematic.
+
+## Memory areas
+
+EFFFEH is a word that contains system  parameter flags:
+
+bit | Flag | Meaning 0 | Meaning 1
+--- | ---- | --------- | ---------
+0 | emulator | Console Mode | Terminal Mode
+1 | On/Off Line | On-Line | Off-Line
+2 | Set-Up Mode | Normal | Set-Up mode
+3 | Hold Screen | Normal | Hold Scrn in effect
+4 | Scroll I/P | Nomral | Sm Scroll in progress
+5 | Reserved |
+6 | Reserved |
+7 | Print Screen Key | Not Pressed | Pressed
+8 | Comm Opt Present | Present | No Present
+9 | RX50-Ctrlr Bd | Present | No Present
+10 | Graphics Bd | Present | No Present
+11 | Comm Memory Option | Present | No Present
+12 | Reserved |
+13 | Reserved |
+14 | Reserved |
+15 | Reserved |
+
+DOS sees bit 8 set and infers the presence of the hard disk controller by doing inb(0x68) & 0xe0 == 0xa0
+
+It uses INT ROM DI==0xe to get clock rate
+
+It also uses function 0xc to reset vectors for 02 (NMI for bad RAM)
+20, 22, 23, 25, 26, and 2C which puts the graphics card and extended
+option card into reset.
