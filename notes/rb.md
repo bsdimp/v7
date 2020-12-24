@@ -305,7 +305,6 @@ D3 | D2 | D1 | D0 | Function
 1 | 1 | 0 | 1 | Set basic attribute to reverse video *
 1 | 1 | 1 | 0 | reserved future *
 1 | 1 | 1 | 1 | reserved future *
------------------
 
 * Note: These functions also clear the blink flip-flip
 
