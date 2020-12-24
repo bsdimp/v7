@@ -224,7 +224,57 @@ Read: Nothing
 
 Write: DC11 interface
 
+From Sheet 3 of the schematic:
+
 ![Rainbow DC11](rb-dc11.png)
+
+Bit | Meaning
+----|--------
+0x10 | Toggle D1H pin on DC11
+0x20 | Toggle D0H pin on DC11
+
+The D0H pin controls interlace. It appears that writing it then clearing it will toggle interlace mode.
+
+The D1H pin controls 80 vs 132 columns. Tiggling it switches between the two.
+
+Since this is just the Video Timing chip, if you switch between 80 and 132 columns, you'll need to adjust the linked lists of characters to display.
+
+This table is in the VT-100 technical manual (page 4-55, table 4-6-1)
+
+D0 | D1 | Configuration
+---|----|--------------
+0 | 0 | 80 Column Mode Interlaced
+0 | 1 | 132 Column Mode Interlaced
+1 | 0 | 60 Hz non interlaced
+1 | 1 | 50 Hz non-interlaced
+
+Writing to this port causes `VIDEO WR 1 L` pin to go low. This causes the DC11 to reset.
+
+The table is a bit confusion, so I'll quote the section here (the
+VT100 is controlled with the 8080):
+
+4.6.2.1 Input Decoder - The input decoder responds to commands on the
+`DO H` and `D1 H` pins (connected to 04 and 05 of the 8080 bus
+respectively) whenever the `VIDEO WR 1 L` pin is low. The outputs of the
+decoder select 80 / 132 column, 60 / 50 hertz refresh, and
+interlacedjnoninterlaced modes of operation. Table 4-6-1 shows that
+when `D1 H` is low the number of columns is programmed according to the
+state of `DO H`, and when `D1 H` is high the refresh rate is
+programmed. Interlaced mode is always selected when the column mode
+is set, and noninterlaced mode is selected when the refresh rate is
+set.  The interlace mode in use depends on whether "number of
+columns" or "refresh rate" was selected last.
+
+In addition to strobing data into the input decoder, `VIDEO WR 1 L` also
+acts as a reset signal for the DCOII. Whenever `VIDEO WR 1 L` is low, the
+counters in the DCOll are held in a cleared state. Resetting the
+counters serves no purpose in the VT100 because the remainder of the
+VT100 synchronizes itself to the DC11, but a reset is useful for
+testing both individual chips and complete modules. Because writing
+into the DC11 would cause the counters to reset and disturb the
+display, this is never done unless the mode is being changed.
+
+Accessed in Venix as a 16-bit port, though it likely doesn't matter.
 
 ### Port 0xC
 
@@ -232,4 +282,33 @@ Read: Nothing
 
 Write: DC12 interface
 
+From Sheet 3 of the schematic:
 ![Rainbow DC11](rb-dc12.png)
+
+This writes the 4 bits (D0H through D3H) to the DC12 video controller. From the VT100 Technical manual, page 4-70, we have Table 4-6-2
+
+D3 | D2 | D1 | D0 | Function
+---|----|----|----|----------
+0 | 0 | 0 | 0 | Load low order scroll latch = 00
+0 | 0 | 0 | 1 | Load low order scroll latch = 01
+0 | 0 | 1 | 0 | Load low order scroll latch = 10
+0 | 0 | 1 | 1 | Load low order scroll latch = 11
+0 | 1 | 0 | 0 | Load high order scroll latch = 00
+0 | 1 | 0 | 1 | Load high order scroll latch = 01
+0 | 1 | 1 | 0 | Load high order scroll latch = 10
+0 | 1 | 1 | 1 | Load high order scroll latch = 11
+1 | 0 | 0 | 0 | Toggle blink flip-flop
+1 | 0 | 0 | 1 | Clear vertical frequency interrupt
+1 | 0 | 1 | 0 | Set reverse field on
+1 | 0 | 1 | 1 | Set reverse field off
+1 | 1 | 0 | 0 | Set basic attribute to Underline *
+1 | 1 | 0 | 1 | Set basic attribute to reverse video *
+1 | 1 | 1 | 0 | reserved future *
+1 | 1 | 1 | 1 | reserved future *
+-----------------
+
+* Note: These functions also clear the blink flip-flip
+
+http://bitsavers.trailing-edge.com/pdf/dec/terminal/vt100/EK-VT100-TM-003_VT100_Technical_Manual_Jul82.pdf is the manual, and has all the detail
+if you wanted to implement the VT100 in firmware. However, the Rainbow already has a full terminal emulator embedded in it, so knowing too
+much will wind up fighting the firmware. It's unclear if this is a good or a bad thing... It would, however, be a large thing.
