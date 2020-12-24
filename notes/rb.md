@@ -220,24 +220,24 @@ E | SH1 WR BRG MUX L
 
 *WRITE:* unclear... something to do with INTZ80
 
-### Port 0x2
+### Port 0x2 General Input Status Register
 
 *READ:* Asserts `SH1 IORD4 L` which returns this register defined on sheet 6:
 
 ![Rainbow Read Port 2](rb-port-2-rd.png)
 
-Note: Y7 is wired to D0, Y6 to D1, etc
+Note: Y7 is wired to D0, Y6 to D1, etc on the shared data bus.
 
 Bit | Signal | Function
 ----|--------|---------
-0x1 | SH1 INT Z80 L | Interrupt to the Z80 asserted
-0x2 | SH8 INT 88 L | Interrupt to 8088 asserted
-0x4 | SH6 MHFU ENB L | Is the Massive Hardware Fowl Up feature enabled?
-0x8 | SH9 COMM RLSD | Realtime state of RLSD from Communications port pin 8
-0x10 | SH9 COMM CTS | Realtime state of CTS from Communications port pin 5
-0x20 | SH9 COMM DSR | Realtime state of DSR from Communications port pin 6
-0x40 | SH9 COMM SI/SCF | Realtime state of SI/SCF from Communications port pin 12
-0x80 | SH9 COMM RI | Realtime state of RI from Communications port pin 22
+0x1 | SH9 COMM RI | Realtime state of RI from Communications port pin 22
+0x2 | SH9 COMM SI/SCF | Realtime state of SI/SCF from Communications port pin 12
+0x4 | SH9 COMM DSR | Realtime state of DSR from Communications port pin 6
+0x8 | SH9 COMM CTS | Realtime state of CTS from Communications port pin 5
+0x10 | SH9 COMM RLSD | Realtime state of RLSD from Communications port pin 8
+0x20 | SH6 MHFU ENB L | Is the Massive Hardware Fowl Up feature enabled?
+0x40 | SH8 INT 88 L | Interrupt to 8088 asserted
+0x80 | SH1 INT Z80 L | Interrupt to the Z80 asserted
 
 *WRITE:* Asserts `SH IO WR 4 L` which updates this register
 ....
