@@ -312,6 +312,30 @@ display, this is never done unless the mode is being changed.
 
 Accessed in Venix as a 16-bit port, though it likely doesn't matter.
 
+### Port 0x6
+
+**READ:** Nothing
+
+**WRITE:** Baud rate for COM port
+
+Asserts `SH1 WR5016H` which latches the baud rate.
+
+XXX schematic here for the 5016 lookup
+
+XXX diagram here for the 5016 lookup from technical docs
+
+### Port 0x8
+
+**READ:** `SH1 IORD2 L`
+
+**WRITE:** NOTHING Connected
+
+### Port 0xA
+
+**READ:** `SH1 IORD6 L`
+
+**WRITE:** `SH1 IO WR 6 L`
+
 ### Port 0xC
 
 **READ:** Nothing
@@ -355,3 +379,11 @@ however, be a large thing.
 The Rainbow's firmware uses the vertical refresh interrupt to do
 smooth scrolling, cursor blinking, clearing the vertical frequency
 interrupt, etc.
+
+### Port 0xE
+
+**READ:** Nothing connected
+
+**WRITE:** `SH1 WR BRG MUX L`
+
+This controlls which source the Communications port uses for its baud clock: internal from the 5016 or external from TxC and RxD.
