@@ -330,11 +330,42 @@ XXX diagram here for the 5016 lookup from technical docs
 
 **WRITE:** NOTHING Connected
 
-### Port 0xA
+### Port 0xA Diagnostics Port
+
+XXX !!! /!\ Need to chase down where at least some of these signals go that aren't
+diagnstic related.
 
 **READ:** `SH1 IORD6 L`
 
+![Rainbow Port A](rb-port-a-rd.png)
+
+Bit | Signal | Meaning
+----|--------|--------
+0x1 | SH7 Z RESET L | Z80 in reset?
+0x2 | - | Jumper W13 installed
+0x4 | - | Jumper W14 installed
+0x8 | - | Jumper W15 installed
+0x10 | SH7 DIAG LOOPBACK H | When the loopback diagnostic path is engaged
+0x20 | SH7 PORT LOOPBACK H | When the port loopback is engaed
+0x40 | SH7 PROGRAM NVM H | The NVM is programming
+0x80 | SH7 RECALL NVM L | Iniitate a recall from persistent storage
+
 **WRITE:** `SH1 IO WR 6 L`
+
+![Rainbow Port A](rb-port-a-wr.png)
+
+Bit | Signal | Meaning
+----|--------|--------
+0x1 | SH7 Z RESET L | Reset Z80
+0x2 | SH7 DISP BLANK L | Blank out the display
+0x4 | SH7 GRF VID SEL H | Graphics Video Select (what does this do?)
+0x8 | SH7 PARITY TEST H | Parity test..
+0x10 | SH7 DIAG LOOPBACK H | When the loopback diagnostic path is engaged
+0x20 | SH7 PORT LOOPBACK H | When the port loopback is engaed
+0x40 | SH7 PROGRAM NVM H | The NVM is programming
+0x80 | SH7 RECALL NVM L | Iniitate a recall from persistent storage
+
+**INTERESTING SIGNALS:** `SH7 PROGRAM NVM H`, `SH7 RECALL NVM L`, `SH7 Z RESET L`, `SH7 DISP BLANK L` and `SH7 GRF VID SEL H`
 
 ### Port 0xC
 
