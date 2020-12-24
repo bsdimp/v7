@@ -220,7 +220,7 @@ E | SH1 WR BRG MUX L
 
 **WRITE:** unclear... something to do with INTZ80
 
-### Port 0x2 General Input Status Register
+### Port 0x2 General Input Status Register mostly COMM status
 
 **READ:** Asserts `SH1 IORD4 L` which returns this register defined on sheet 6:
 
@@ -239,8 +239,20 @@ Bit | Signal | Function
 0x40 | SH8 INT 88 L | Interrupt to 8088 asserted
 0x80 | SH1 INT Z80 L | Interrupt to the Z80 asserted
 
-**WRITE:** Asserts `SH IO WR 4 L` which updates this register
-....
+**WRITE:** Asserts `SH IO WR 4 L` which updates this register defined on sheet 7:
+
+![Rainbow Write Port 2](rb-port-2-wr.png)
+
+Bit | Signal | Function
+----|--------|---------
+0x1 | SH7 COMM SPD SEL H | Set SPD SEL for Communications port pin 23
+0x2 | SH7 COMM SRTS H | Set SRTS for Communications port pin 19
+0x4 | SH7 COMM DTR L | Set DTR for Communications port pin 20
+0x8 | SH7 COMM RTS | Set RTS for Communications port pin 5
+0x10 | - | D3 Diagnostic LED
+0x20 | - | D6 Diagnostic LED
+0x40 | - | D4 Diagnostic LED
+0x80 | - | D5 Diagnostic LED
 
 ### Port 0x4
 
