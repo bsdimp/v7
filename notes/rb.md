@@ -213,3 +213,23 @@ E | SH1 WR BRG MUX L
 60 | SH1 BDL SEL2 L
 30 | SH1 BDL SEL3 L
 70 | SH1 BDL SEL4 L
+
+### Port 0x0
+
+### Port 0x2
+
+### Port 0x4
+
+Read: Nothing
+
+Write: DC11 interface
+
+![Rainbow DC11](rb-dc11.png)
+
+### Port 0xC
+
+Read: Nothing
+
+Write: DC12 interface
+
+![Rainbow DC11](rb-dc12.png)
