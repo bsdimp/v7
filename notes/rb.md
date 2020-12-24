@@ -309,6 +309,13 @@ D3 | D2 | D1 | D0 | Function
 
 * Note: These functions also clear the blink flip-flip
 
-http://bitsavers.trailing-edge.com/pdf/dec/terminal/vt100/EK-VT100-TM-003_VT100_Technical_Manual_Jul82.pdf is the manual, and has all the detail
-if you wanted to implement the VT100 in firmware. However, the Rainbow already has a full terminal emulator embedded in it, so knowing too
-much will wind up fighting the firmware. It's unclear if this is a good or a bad thing... It would, however, be a large thing.
+http://bitsavers.trailing-edge.com/pdf/dec/terminal/vt100/EK-VT100-TM-003_VT100_Technical_Manual_Jul82.pdf
+is the manual, and has all the detail if you wanted to implement the
+VT100 in firmware. However, the Rainbow already has a full terminal
+emulator embedded in it, so knowing too much will wind up fighting the
+firmware. It's unclear if this is a good or a bad thing... It would,
+however, be a large thing.
+
+The Rainbow's firmware uses the vertical refresh interrupt to do
+smooth scrolling, cursor blinking, clearing the vertical frequency
+interrupt, etc.
