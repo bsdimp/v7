@@ -216,13 +216,23 @@ E | SH1 WR BRG MUX L
 
 ### Port 0x0
 
+*READ:* Clears the interrupt from the Z80
+
+*WRITE:* unclear... something to do with INTZ80
+
 ### Port 0x2
+
+*READ:* Asserts `SH1 IORD4 L` which returns this register
+...
+
+*WRITE:* Asserts 'SH IO WR 4 L` which updates this register
+....
 
 ### Port 0x4
 
-Read: Nothing
+*READ:* Nothing
 
-Write: DC11 interface
+*WRITE:* DC11 interface
 
 From Sheet 3 of the schematic:
 
