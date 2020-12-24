@@ -222,10 +222,24 @@ E | SH1 WR BRG MUX L
 
 ### Port 0x2
 
-*READ:* Asserts `SH1 IORD4 L` which returns this register
-...
+*READ:* Asserts `SH1 IORD4 L` which returns this register defined on sheet 6:
 
-*WRITE:* Asserts 'SH IO WR 4 L` which updates this register
+![Rainbow Read Port 2](rb-port-2-rd.png)
+
+Note: Y7 is wired to D0, Y6 to D1, etc
+
+Bit | Signal | Function
+----|--------|---------
+0x1 | SH1 INT Z80 L | Interrupt to the Z80 asserted
+0x2 | SH8 INT 88 L | Interrupt to 8088 asserted
+0x4 | SH6 MHFU ENB L | Is the Massive Hardware Fowl Up feature enabled?
+0x8 | SH9 COMM RLSD | Realtime state of RLSD from Communications port pin 8
+0x10 | SH9 COMM CTS | Realtime state of CTS from Communications port pin 5
+0x20 | SH9 COMM DSR | Realtime state of DSR from Communications port pin 6
+0x40 | SH9 COMM SI/SCF | Realtime state of SI/SCF from Communications port pin 12
+0x80 | SH9 COMM RI | Realtime state of RI from Communications port pin 22
+
+*WRITE:* Asserts `SH IO WR 4 L` which updates this register
 ....
 
 ### Port 0x4
@@ -294,7 +308,7 @@ Write: DC12 interface
 
 From Sheet 3 of the schematic:
 
-![Rainbow DC11](rb-dc12.png)
+![Rainbow DC12](rb-dc12.png)
 
 This writes the 4 bits (D0H through D3H) to the DC12 video controller. From the VT100 Technical manual, page 4-70, we have Table 4-6-2
 
