@@ -216,13 +216,13 @@ E | SH1 WR BRG MUX L
 
 ### Port 0x0
 
-*READ:* Clears the interrupt from the Z80
+**READ:** Clears the interrupt from the Z80
 
-*WRITE:* unclear... something to do with INTZ80
+**WRITE:** unclear... something to do with INTZ80
 
 ### Port 0x2 General Input Status Register
 
-*READ:* Asserts `SH1 IORD4 L` which returns this register defined on sheet 6:
+**READ:** Asserts `SH1 IORD4 L` which returns this register defined on sheet 6:
 
 ![Rainbow Read Port 2](rb-port-2-rd.png)
 
@@ -239,14 +239,14 @@ Bit | Signal | Function
 0x40 | SH8 INT 88 L | Interrupt to 8088 asserted
 0x80 | SH1 INT Z80 L | Interrupt to the Z80 asserted
 
-*WRITE:* Asserts `SH IO WR 4 L` which updates this register
+**WRITE:** Asserts `SH IO WR 4 L` which updates this register
 ....
 
 ### Port 0x4
 
-*READ:* Nothing
+**READ:** Nothing
 
-*WRITE:* DC11 interface
+**WRITE:** DC11 interface
 
 From Sheet 3 of the schematic:
 
@@ -302,9 +302,9 @@ Accessed in Venix as a 16-bit port, though it likely doesn't matter.
 
 ### Port 0xC
 
-Read: Nothing
+**READ:** Nothing
 
-Write: DC12 interface
+**WRITE:** DC12 interface
 
 From Sheet 3 of the schematic:
 
