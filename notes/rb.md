@@ -283,6 +283,7 @@ Read: Nothing
 Write: DC12 interface
 
 From Sheet 3 of the schematic:
+
 ![Rainbow DC11](rb-dc12.png)
 
 This writes the 4 bits (D0H through D3H) to the DC12 video controller. From the VT100 Technical manual, page 4-70, we have Table 4-6-2
