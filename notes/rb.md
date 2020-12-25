@@ -370,6 +370,8 @@ Bit | Signal | Meaning
 
 Upper bits of E61 aren't put onto the data bus, so will float (usually meaning will read as 1's).
 
+It's unclaer to me why SH1 UBA8..UBA11 are passed through here and what asserting RD2 would actually do.
+
 **WRITE:** NOTHING Connected
 
 ### Port 0xA Diagnostics Port
