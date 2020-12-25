@@ -320,7 +320,12 @@ Accessed in Venix as a 16-bit port, though it likely doesn't matter.
 
 Asserts `SH1 WR5016H` which latches the baud rate.
 
-XXX schematic here for the 5016 lookup
+![Rainbow Ports 6 and E](rb-port-6-e-wr.png)
+
+Bits | Value
+-----|------
+0xF | Receive Baud Rate
+0xF0 | Transmit Baud Rate
 
 Baud Rate | Hex Value
 ----------|----------
@@ -343,6 +348,9 @@ Baud Rate | Hex Value
 19200 | 11
 
 Note: 7200 baud evidentally isn't possible, but should be 0xF.
+
+However, see also port 0xE which controls the multiplexing between the
+TxC / RxC and the internal signal generation.
 
 ### Port 0x8
 
@@ -437,4 +445,32 @@ interrupt, etc.
 
 **WRITE:** `SH1 WR BRG MUX L`
 
-This controlls which source the Communications port uses for its baud clock: internal from the 5016 or external from TxC and RxD.
+This controlls which source the Communications port uses for its baud clock: internal from the 5016 or external from TxC and RxC.
+
+![Rainbow Ports 6 and E](rb-port-6-e-wr.png)
+
+Bit | Result
+----|-------
+0x8 | Multiplex. When 0, baud rate generator for Communications port controlled by 5016. When 1 it's controlled by the TxC and RxC signals.
+0x7 | Baud rate divisor, see table below
+
+Value | Baud
+------|-----
+0 | 75
+1 | 150
+2 | 300
+3 | 600
+4 | 1200
+5 | 2400
+6 | 4800 (Default)
+7 | 9600
+
+The XBIOS software does a table lookup from the values for Port 0x6 to
+write these values. The documentation is silent about why some rates
+aren't used, but this diagram is why.
+
+The Printer port has a more limited number of baud rates, requires
+symmetric baud rates, and has little flow control available (it will
+allow the remote device to throttle data sent to it, but won't allow
+The Rainbow to throttle the remote sending data). The uPD7201 also gives
+second level priority to the Printer port in almost all things.
