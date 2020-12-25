@@ -322,7 +322,27 @@ Asserts `SH1 WR5016H` which latches the baud rate.
 
 XXX schematic here for the 5016 lookup
 
-XXX diagram here for the 5016 lookup from technical docs
+Baud Rate | Hex Value
+----------|----------
+50 | 1
+75 | 2
+110 | 3
+134.5 | 4
+150 | 5
+200 | 6
+300 | 7
+600 | 8
+1200 | 9
+1800 | A
+2000 | B
+2400 | C
+3600 | D
+4800 | E
+7200 | -
+9600 | 10
+19200 | 11
+
+Note: 7200 baud evidentally isn't possible, but should be 0xF.
 
 ### Port 0x8
 
