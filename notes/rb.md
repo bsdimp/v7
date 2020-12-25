@@ -363,7 +363,7 @@ TxC / RxC and the internal signal generation.
 
 Bit | Signal | Meaning
 ----|--------|--------
-0x1 | SH1 BDL PRES L | Add-in board present in HD/Advanced Comm slot
+0x1 | SH10 BDL PRES L | Add-in board present in HD/Advanced Comm slot
 0x2 | SH10 FLPY PRES L | Floppy controller present
 0x4 | SH10 GRAPHIC PRES L | Graphics card is installed
 0x8 | SH11 MEM PRES L | Memory card present
