@@ -347,7 +347,10 @@ Baud Rate | Hex Value
 9600 | 10
 19200 | 11
 
-Note: 7200 baud evidentally isn't possible, but should be 0xF.
+Note: 7200 baud evidentally isn't possible, but should be 0xF. I guess
+this is because there was an error in the divisor in the 5016 that was
+never fixed, though I've connected a scope to see what baud rate
+actually happens.
 
 However, see also port 0xE which controls the multiplexing between the
 TxC / RxC and the internal signal generation.
@@ -355,6 +358,17 @@ TxC / RxC and the internal signal generation.
 ### Port 0x8
 
 **READ:** `SH1 IORD2 L`
+
+![Rainbow Port 8](rb-port-8-rd.png)
+
+Bit | Signal | Meaning
+----|--------|--------
+0x1 | SH1 BDL PRES L | Add-in board present in HD/Advanced Comm slot
+0x2 | SH10 FLPY PRES L | Floppy controller present
+0x4 | SH10 GRAPHIC PRES L | Graphics card is installed
+0x8 | SH11 MEM PRES L | Memory card present
+
+Upper bits of E61 aren't put onto the data bus, so will float (usually meaning will read as 1's).
 
 **WRITE:** NOTHING Connected
 
