@@ -490,3 +490,38 @@ symmetric baud rates, and has little flow control available (it will
 allow the remote device to throttle data sent to it, but won't allow
 The Rainbow to throttle the remote sending data). The uPD7201 also gives
 second level priority to the Printer port in almost all things.
+
+## Univation Notes
+
+The Univation card goes in the memory slot, but with a 'piggy back'
+clip that goes over one of the chips. The instructions say to put the
+clip over the chip so that there's 5 pins visible to the left.  It
+says the LS138 to the right of the big chip (the Z80 as it happens)
+which I found to be E51 (didn't do clip art for this, maybe I will):
+
+![Rainbow E51](rb-sh1-E51-74ls138.png)
+
+It's a 16-pin DIP, so that means the clip goes over pins 6, 7, 8, 9, 10, 11.
+
+![Dip numbers](rb-dip-16-image.png)
+
+These are E3, O7, GND, O6, O5 and O4 according to the datasheet (or F4..F7
+according to the schematic).
+
+Pin | Name | Signal | notes
+----|------|--------|-----------
+6 | E3 | SH1 IO H / M L | Used to enable output when I/O acceses are happending
+7 | O7 | SH1 BDL SEL 4 L | Board select 4
+8 | GND | GND | Ground
+9 | O6 | SH1 BDL SEL 3 L | Board select 3
+10 | O5 | SH1 BDL SEL 2 L | Board select 2
+11 | O4 | SH1 BDL SEL 1 L | Board select 1
+
+So clearly, the Univation board is using this to piggy-back support
+for I/O cycles onto the memory slot which doesn't have these
+signals. I've not traced these signals on the board I have.
+
+The board I have has a second clip with one wire for reasons unknown :(. I've not
+puzzled out yet where it goes. They aren't mentioned in the documentation, and
+the jumpers for my card are different.
+
