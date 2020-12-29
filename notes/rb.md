@@ -519,9 +519,11 @@ Pin | Name | Signal | notes
 
 So clearly, the Univation board is using this to piggy-back support
 for I/O cycles onto the memory slot which doesn't have these
-signals. I've not traced these signals on the board I have.
+signals. I've not traced these signals on the board I have, apart from
+knowing that only the Board Selects are connected.
 
-The board I have has a second clip with one wire for reasons unknown :(. I've not
-puzzled out yet where it goes. They aren't mentioned in the documentation, and
-the jumpers for my card are different.
-
+The board I have has a second clip with one wire. I think it is to
+account for the differences between A and B memory connector pinouts,
+but I'm not sure. I've not puzzled out yet where it goes. They aren't
+mentioned in the documentation, and the jumpers for my card are
+different.
